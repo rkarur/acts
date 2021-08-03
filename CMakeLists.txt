@@ -43,6 +43,7 @@ option(ACTS_BUILD_FATRAS "Build FAst TRAcking Simulation package" OFF)
 option(ACTS_BUILD_FATRAS_GEANT4 "Build Geant4 Fatras package" OFF)
 # examples related options
 option(ACTS_BUILD_EXAMPLES "Build standalone examples" OFF)
+option(ACTS_BUILD_EXAMPLES_ANN "Build ANN-based code in the examples" OFF)
 option(ACTS_BUILD_EXAMPLES_DD4HEP "Build DD4hep-based code in the examples" OFF)
 option(ACTS_BUILD_EXAMPLES_GEANT4 "Build Geant4-based code in the examples" OFF)
 option(ACTS_BUILD_EXAMPLES_HEPMC3 "Build HepMC3-based code in the examples" OFF)
@@ -258,6 +259,7 @@ add_component_if(Fatras Fatras ACTS_BUILD_FATRAS)
 
 # examples
 add_subdirectory_if(Examples ACTS_BUILD_EXAMPLES)
+add_subdirectory_if(thirdparty/annoy ACTS_BUILD_EXAMPLES_ANN)
 
 # automated tests and benchmarks
 if(ACTS_BUILD_BENCHMARKS OR ACTS_BUILD_INTEGRATIONTESTS OR ACTS_BUILD_UNITTESTS)
