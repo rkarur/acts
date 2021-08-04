@@ -1,0 +1,53 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/global/homes/r/rkarur/acts/Examples/Io/Json/src/JsonDigitizationConfig.cpp" "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Io/Json/CMakeFiles/ActsExamplesIoJson.dir/src/JsonDigitizationConfig.cpp.o"
+  "/global/homes/r/rkarur/acts/Examples/Io/Json/src/JsonGeometryList.cpp" "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Io/Json/CMakeFiles/ActsExamplesIoJson.dir/src/JsonGeometryList.cpp.o"
+  "/global/homes/r/rkarur/acts/Examples/Io/Json/src/JsonMaterialWriter.cpp" "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Io/Json/CMakeFiles/ActsExamplesIoJson.dir/src/JsonMaterialWriter.cpp.o"
+  "/global/homes/r/rkarur/acts/Examples/Io/Json/src/JsonOptionsWriter.cpp" "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Io/Json/CMakeFiles/ActsExamplesIoJson.dir/src/JsonOptionsWriter.cpp.o"
+  "/global/homes/r/rkarur/acts/Examples/Io/Json/src/JsonSurfacesWriter.cpp" "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Io/Json/CMakeFiles/ActsExamplesIoJson.dir/src/JsonSurfacesWriter.cpp.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "ActsExamplesIoJson_EXPORTS"
+  "BOOST_ALL_NO_LIB"
+  "BOOST_PROGRAM_OPTIONS_DYN_LINK"
+  "BOOST_SPIRIT_USE_PHOENIX_V3"
+  "JSON_USE_IMPLICIT_CONVERSIONS=1"
+  "VECCORE_ENABLE_VC"
+  "VECGEOM_INPLACE_TRANSFORMATIONS"
+  "VECGEOM_NO_SPECIALIZATION"
+  "VECGEOM_QUADRILATERALS_VC"
+  "VECGEOM_USE_INDEXEDNAVSTATES"
+  "VECGEOM_VC"
+  )
+
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../../Io/Json/include"
+  "../../../Core/include"
+  "Core"
+  "../../../Plugins/Json/include"
+  "../../../thirdparty/nlohmann_json/single_include"
+  "../../Algorithms/Digitization/include"
+  "../../Framework/include"
+  "../../../Fatras/include"
+  "/cvmfs/sft.cern.ch/lcg/views/LCG_98python3/x86_64-centos7-gcc8-opt/include/eigen3"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Plugins/Json/CMakeFiles/ActsPluginJson.dir/DependInfo.cmake"
+  "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Algorithms/Digitization/CMakeFiles/ActsExamplesDigitization.dir/DependInfo.cmake"
+  "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Examples/Framework/CMakeFiles/ActsExamplesFramework.dir/DependInfo.cmake"
+  "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Fatras/CMakeFiles/ActsFatras.dir/DependInfo.cmake"
+  "/global/homes/r/rkarur/acts/Examples/AnnoyPlay/acts_build_test/Core/CMakeFiles/ActsCore.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
