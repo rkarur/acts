@@ -18,4 +18,9 @@ namespace ActsExamples {
 	ActsExamples::BareAlgorithm("ApproximateNearestNeighborAlgorithm", lvl),
 	m_cfg(std::move(cfg))
     {}
+
+    ActsExamples::ProcessCode ApproximateNearestNeighborAlgorithm::execute(
+	const ActsExamples::AlgorithmContext& ctx) const {
+    }
+    
 }

@@ -14,12 +14,21 @@ namespace ActsExamples {
     class ApproximateNearestNeighborAlgorithm final : public BareAlgorithm {
     public:
 	struct Config {
+	    std::string inputSpacePoints;
+	    std::string inputSourceLinks;
+	    std::string inputMeasurements;
+	    std::string outputSeeds;
+	    std::string outputProtoTracks;
+	    std::string outputInitialTrackParameters;
+	    std::string outputTrajectories;
+	    size_t bucketSize;
+	    size_t queries;
 	};
 
 	ApproximateNearestNeighborAlgorithm(Config cfg, Acts::Logging::Level lvl);
 
-    // 	ActsExamples::ProcessCode execute(
-    // 	    const ActsExamples::AlgorithmContext& ctx) const final;
+	ActsExamples::ProcessCode execute(
+	    const ActsExamples::AlgorithmContext& ctx) const final;
 
     private:
 	Config m_cfg;

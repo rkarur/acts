@@ -96,3 +96,18 @@ install(
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 add_subdirectory_if(DD4hep ACTS_BUILD_EXAMPLES_DD4HEP)
+
+if(ACTS_BUILD_EXAMPLES_ANN)
+  add_executable(
+    ActsExamplesANNTracksGeneric
+    GenericRecANNTracks.cpp)
+  target_link_libraries(
+    ActsExamplesANNTracksGeneric
+    PRIVATE
+    ActsExamplesRecANN
+    ActsExamplesDetectorGeneric)
+  install(
+    TARGETS
+    ActsExamplesANNTracksGeneric
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+endif()
