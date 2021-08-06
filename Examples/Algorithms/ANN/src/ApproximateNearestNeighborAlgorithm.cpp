@@ -7,6 +7,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include <annoylib.h>
+#include <kissrandom.h>
 
 #include "ActsExamples/ANN/ApproximateNearestNeighborAlgorithm.hpp"
 #include "ActsExamples/EventData/Trajectories.hpp"
@@ -58,10 +59,11 @@ namespace ActsExamples {
     ActsExamples::ProcessCode ApproximateNearestNeighborAlgorithm::execute(
 	const ActsExamples::AlgorithmContext& ctx) const {
 	const SimSpacePointContainer& allsps = ctx.eventStore.get<SimSpacePointContainer>(m_cfg.inputSpacePoints);
-	AnnIndex idx = buildIndex(allsps); // TODO
+    std::vector<std::vector<float>> s_points;
+	AnnIndex idx = buildIndex(allsps, s_points); // TODO
 	for (size_t i = 0; i < m_cfg.queries; i++) {
 	    std::string key = m_cfg.inputSpacePoints + std::to_string(i);
-	    SimSpacePointContainer sps = annQuery(idx, allsps); // TODO
+	    SimSpacePointContainer sps = annQuery(idx, allsps, i, m_cfg.bucketSize); // TODO
 	    ctx.eventStore.add(key, std::move(sps));
 	    m_seedFinders.at(i).execute(ctx);
 	    m_paramsEstimators.at(i).execute(ctx);
@@ -87,18 +89,33 @@ namespace ActsExamples {
     }
 
     ApproximateNearestNeighborAlgorithm::AnnIndex
-    ApproximateNearestNeighborAlgorithm::buildIndex(const SimSpacePointContainer& sps) const
+    ApproximateNearestNeighborAlgorithm::buildIndex(const SimSpacePointContainer& sps, std::vector<std::vector<float>>& s_points) const
     {
 	// TODO
-	return nullptr;
+    AnnIndex obj(3);
+    s_points.clear();
+    s_points.resize(sps.size());
+    for (size_t i = 0; i < sps.size(); i++){
+        s_points[i][0] = sps[i].x();
+        s_points[i][1] = sps[i].y();
+        s_points[i][2] = sps[i].z();
+        obj.add_item(i,s_points[i].data());
+    }
+    obj.build(5);
+	return obj;
     }
 
     SimSpacePointContainer
-    ApproximateNearestNeighborAlgorithm::annQuery(const AnnIndex&, const SimSpacePointContainer& sps) const
+    ApproximateNearestNeighborAlgorithm::annQuery(const AnnIndex& IndexIQ, const SimSpacePointContainer& sps, int hit_id, int bucket_size) const
     {
 	// TODO
-	SimSpacePointContainer dummy {sps};
-	return dummy;
+// 	SimSpacePointContainer dummy {sps};
+    SimSpacePointContainer subset = {};
+    std::vector<int> nn_idx;
+    std::vector<float> nn_dist;
+    IndexIQ.get_nns_by_item(0, bucket_size+1, -1, &nn_idx, &nn_dist);
+    for (size_t i = 0; i < nn_idx.size(); i++) subset.push_back(sps[nn_idx[i]]);
+	return subset;
     }
     
 }

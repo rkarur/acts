@@ -8,6 +8,9 @@
 
 #pragma once
 
+#include <annoylib.h>
+#include <kissrandom.h>
+
 #include "ActsExamples/Framework/BareAlgorithm.hpp"
 #include "ActsExamples/Framework/WhiteBoard.hpp"
 #include "ActsExamples/TrackFinding/SeedingAlgorithm.hpp"
@@ -38,9 +41,9 @@ namespace ActsExamples {
     private:
 	Config m_cfg;
 
-	typedef void* AnnIndex; // TODO Change this!!
-	AnnIndex buildIndex(const SimSpacePointContainer&) const;
-	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&) const;
+	typedef AnnoyIndex<int, float, Angular, Kiss32Random,AnnoyIndexSingleThreadedBuildPolicy> AnnIndex; // TODO Change this!! // Changed!
+	AnnIndex buildIndex(const SimSpacePointContainer&, std::vector<std::vector<float>>&) const;
+	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&, int, int) const;
 
 	// Note: gotta find a better way?
 	std::vector<SeedingAlgorithm> m_seedFinders;
