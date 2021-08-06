@@ -11,6 +11,7 @@ target_link_libraries(
     ActsExamplesFramework
     ActsExamplesIoJson
     ActsExamplesMagneticField
+    ActsExamplesTrackFinding
     Boost::program_options
     Annoy)
 

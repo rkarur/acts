@@ -9,6 +9,10 @@
 #pragma once
 
 #include "ActsExamples/Framework/BareAlgorithm.hpp"
+#include "ActsExamples/Framework/WhiteBoard.hpp"
+#include "ActsExamples/TrackFinding/SeedingAlgorithm.hpp"
+#include "ActsExamples/TrackFinding/TrackFindingAlgorithm.hpp"
+#include "ActsExamples/TrackFinding/TrackParamsEstimationAlgorithm.hpp"
 
 namespace ActsExamples {
     class ApproximateNearestNeighborAlgorithm final : public BareAlgorithm {
@@ -17,12 +21,13 @@ namespace ActsExamples {
 	    std::string inputSpacePoints;
 	    std::string inputSourceLinks;
 	    std::string inputMeasurements;
-	    std::string outputSeeds;
 	    std::string outputProtoTracks;
-	    std::string outputInitialTrackParameters;
 	    std::string outputTrajectories;
 	    size_t bucketSize;
 	    size_t queries;
+	    SeedingAlgorithm::Config seedingCfg;
+	    TrackParamsEstimationAlgorithm::Config paramsEstimationCfg;
+	    TrackFindingAlgorithm::Config trackFindingCfg;
 	};
 
 	ApproximateNearestNeighborAlgorithm(Config cfg, Acts::Logging::Level lvl);
@@ -32,5 +37,14 @@ namespace ActsExamples {
 
     private:
 	Config m_cfg;
+
+	typedef void* AnnIndex; // TODO Change this!!
+	AnnIndex buildIndex(const SimSpacePointContainer&) const;
+	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&) const;
+
+	// Note: gotta find a better way?
+	std::vector<SeedingAlgorithm> m_seedFinders;
+	std::vector<TrackParamsEstimationAlgorithm> m_paramsEstimators;
+	std::vector<TrackFindingAlgorithm> m_trackFinders;
     };
 }
