@@ -7,6 +7,7 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #pragma once
+#define ANNOYLIB_MULTITHREADED_BUILD
 
 #include <annoylib.h>
 #include <kissrandom.h>
@@ -41,7 +42,7 @@ namespace ActsExamples {
     private:
 	Config m_cfg;
 
-	typedef AnnoyIndex<int, float, Angular, Kiss32Random,AnnoyIndexSingleThreadedBuildPolicy> AnnIndex; // TODO Change this!! // Changed!
+	typedef AnnoyIndex<int, float, Angular, Kiss32Random,AnnoyIndexMultiThreadedBuildPolicy> AnnIndex; // TODO Change this!! // Changed!
 	AnnIndex buildIndex(const SimSpacePointContainer&, std::vector<std::vector<float>>&) const;
 	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&, int, int) const;
 

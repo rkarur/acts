@@ -6,8 +6,6 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#include <annoylib.h>
-#include <kissrandom.h>
 
 #include "ActsExamples/ANN/ApproximateNearestNeighborAlgorithm.hpp"
 #include "ActsExamples/EventData/Trajectories.hpp"
@@ -61,9 +59,11 @@ namespace ActsExamples {
 	const SimSpacePointContainer& allsps = ctx.eventStore.get<SimSpacePointContainer>(m_cfg.inputSpacePoints);
     std::vector<std::vector<float>> s_points;
 	AnnIndex idx = buildIndex(allsps, s_points); // TODO
+    std::vector<int> hits_idx; hits_idx.resize(s_points.size(),0);
 	for (size_t i = 0; i < m_cfg.queries; i++) {
+        int hit_idx = rand() % allsps.size();
 	    std::string key = m_cfg.inputSpacePoints + std::to_string(i);
-	    SimSpacePointContainer sps = annQuery(idx, allsps, i, m_cfg.bucketSize); // TODO
+	    SimSpacePointContainer sps = annQuery(idx, allsps, hit_idx, m_cfg.bucketSize); // TODO
 	    ctx.eventStore.add(key, std::move(sps));
 	    m_seedFinders.at(i).execute(ctx);
 	    m_paramsEstimators.at(i).execute(ctx);
@@ -96,6 +96,7 @@ namespace ActsExamples {
     s_points.clear();
     s_points.resize(sps.size());
     for (size_t i = 0; i < sps.size(); i++){
+        s_points[i].resize(3);
         s_points[i][0] = sps[i].x();
         s_points[i][1] = sps[i].y();
         s_points[i][2] = sps[i].z();
@@ -113,7 +114,7 @@ namespace ActsExamples {
     SimSpacePointContainer subset = {};
     std::vector<int> nn_idx;
     std::vector<float> nn_dist;
-    IndexIQ.get_nns_by_item(0, bucket_size+1, -1, &nn_idx, &nn_dist);
+    IndexIQ.get_nns_by_item(hit_id, bucket_size+1, -1, &nn_idx, &nn_dist);
     for (size_t i = 0; i < nn_idx.size(); i++) subset.push_back(sps[nn_idx[i]]);
 	return subset;
     }
