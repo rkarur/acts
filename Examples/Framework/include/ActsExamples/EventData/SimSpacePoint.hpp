@@ -36,6 +36,7 @@ class SimSpacePoint {
         m_rho(std::hypot(m_x, m_y)),
         m_varianceRho(varRho),
         m_varianceZ(varZ),
+    vect {pos[Acts::ePos0],pos[Acts::ePos1],pos[Acts::ePos2]},
         m_measurementIndex(measurementIndex) {
     EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(position_t, 3);
   }
@@ -43,6 +44,8 @@ class SimSpacePoint {
   constexpr float x() const { return m_x; }
   constexpr float y() const { return m_y; }
   constexpr float z() const { return m_z; }
+  std::vector<float> vect;
+  float *ptr = &m_x; 
   constexpr float r() const { return m_rho; }
   constexpr float varianceR() const { return m_varianceRho; }
   constexpr float varianceZ() const { return m_varianceZ; }

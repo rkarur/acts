@@ -42,9 +42,10 @@ namespace ActsExamples {
     private:
 	Config m_cfg;
 
-	typedef AnnoyIndex<int, float, Angular, Kiss32Random,AnnoyIndexMultiThreadedBuildPolicy> AnnIndex; // TODO Change this!! // Changed!
+	typedef AnnoyIndex<int, float, Angular, Kiss32Random,AnnoyIndexMultiThreadedBuildPolicy> AnnIndex;
 	AnnIndex buildIndex(const SimSpacePointContainer&, std::vector<std::vector<float>>&) const;
-	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&, int, int) const;
+	SimSpacePointContainer annQuery(const AnnIndex&, const SimSpacePointContainer&, int, int, std::vector<int>&) const;
+	SimSpacePointContainer annQuery_v1(const AnnIndex&, const SimSpacePointContainer&, int, int, std::vector<int>&) const;
 
 	// Note: gotta find a better way?
 	std::vector<SeedingAlgorithm> m_seedFinders;
